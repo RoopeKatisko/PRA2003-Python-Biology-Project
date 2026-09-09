@@ -1,9 +1,13 @@
 #PRA2003-Bacterial-Kinematics-Project
-#Questions to answer:
-  #Initial bacterial population
+##Student Info
+#Name: Kristofer Katisko
+#StudentID: 6433876
+
+##Questions to answer:
+#Initial bacterial population
      -Average count of the bacterial population and its variations
      
-  #Does the bacteria and its mutant variant behave in the same way
+#Does the bacteria and its mutant variant behave in the same way
     -Is there symmetry within the original population and its mutant variation, if not, how much do the two populations deviate from eachother
   #Can we calculate and simulate the bacteria's momentum in a 3 dimensional plane
 
