@@ -5,14 +5,18 @@ import numpy as np
 import pandas as pd
 import math
 data = []
+
+#Input file path so that the code works for other users aswell
+file_path = "output-Set0.txt"
+
 #Importing and printing the raw data from the external text file
-with open(r"C:\Users\Krist\Downloads\output-Set0.txt", "r") as datafile: #
+with open(file_path, "r") as datafile:
     for line in datafile:
         operators = line.split()
         print("Initial data", operators)
 
 #Adding and separating the values in the "data" list and through that into a pandas dataframe
-with open(r"C:\Users\Krist\Downloads\output-Set0.txt", "r") as datafile:
+with open(file_path,"r") as datafile:
     for line in datafile:
         operators = line.split()
 
