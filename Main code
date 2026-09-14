@@ -1,0 +1,25 @@
+#MAT2007 DATA ANALYSIS PROJECT CODE
+#Extensions for data reading/Graphing, installation added to readme at a later date
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+#Importing and printing the raw data from the external text file
+data = []
+with open(r"C:\Users\Krist\Downloads\output-Set0.txt", ) as datafile: #Must fix later to be compatible with other peoples files as I doubt there are many Users/Krist peer reviewing this
+    for line in datafile:
+        operators = line.split(" ")
+        print(operators)
+#Creating a pandas dataframe to better work with the values
+
+    px,py,pz,id = operators
+with open(r"C:\Users\Krist\Downloads\output-Set0.txt", ) as datafile:
+    for line in datafile:
+        data.append([
+        float(px),
+        float(py),
+        float(pz),
+        int(id)
+    ])
+dataframe = pd.DataFrame(data, columns=["px","py","pz","id"])
+print(dataframe)
+#Total momentum function
