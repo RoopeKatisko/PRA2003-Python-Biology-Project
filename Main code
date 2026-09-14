@@ -3,23 +3,39 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-#Importing and printing the raw data from the external text file
+import math
 data = []
-with open(r"C:\Users\Krist\Downloads\output-Set0.txt", ) as datafile: #Must fix later to be compatible with other peoples files as I doubt there are many Users/Krist peer reviewing this
+#Importing and printing the raw data from the external text file
+with open(r"C:\Users\Krist\Downloads\output-Set0.txt", "r") as datafile: #
     for line in datafile:
         operators = line.split()
-      
-#Creating a pandas dataframe to better work with the values
+        print("Initial data", operators)
 
-    px,py,pz,id = operators
-with open(r"C:\Users\Krist\Downloads\output-Set0.txt", ) as datafile:
+#Adding and separating the values in the "data" list and through that into a pandas dataframe
+with open(r"C:\Users\Krist\Downloads\output-Set0.txt", "r") as datafile:
     for line in datafile:
+        operators = line.split()
+
+        if len(operators) != 4: #Skips the header ( 1 29 ) which caused problems as it had 2 values instead of 4
+            continue
+
+        px, py, pz, particle_id = operators
+
         data.append([
-        float(px),
-        float(py),
-        float(pz),
-        int(id)
-    ])
-dataframe = pd.DataFrame(data, columns=["px","py","pz","id"])
+            float(px),
+            float(py),
+            float(pz),
+            int(particle_id)
+        ])
+
+dataframe = pd.DataFrame(data, columns=["px", "py", "pz", "id"])
+#Self explanatory
 print(dataframe)
-#Total momentum function
+#Total momentum function using Numpy sqrt functions and pandas dataframe appends
+dataframe["p"] = np.sqrt( 
+    dataframe["px"]**2 + 
+    dataframe["py"]**2 + 
+    dataframe["pz"]**2 
+)
+#Test
+print(dataframe)
