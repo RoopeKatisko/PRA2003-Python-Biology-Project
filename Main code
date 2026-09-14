@@ -7,8 +7,8 @@ import pandas as pd
 data = []
 with open(r"C:\Users\Krist\Downloads\output-Set0.txt", ) as datafile: #Must fix later to be compatible with other peoples files as I doubt there are many Users/Krist peer reviewing this
     for line in datafile:
-        operators = line.split(" ")
-        print(operators)
+        operators = line.split()
+      
 #Creating a pandas dataframe to better work with the values
 
     px,py,pz,id = operators
