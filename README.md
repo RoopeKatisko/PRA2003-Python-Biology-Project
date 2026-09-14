@@ -13,3 +13,8 @@
 
 #Implementation.
 Create a program that reads data from a downloaded file and shows its movement within a 3 dimensional plane using functions containing 3 dimensional arrays displayed through plugins of python such as Numpy, Matplotlib, and pandas as a file analyser. 
+
+#Requirements
+-Numpy
+-Pandas
+-Matplotlib
