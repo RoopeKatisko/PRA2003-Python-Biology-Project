@@ -7,8 +7,9 @@ import math
 data = []
 
 #Input file path so that the code works for other users aswell (Initially it was the file path unique to my laptop)
-file_path = "output-Set0.txt"
-
+print("Please enter the dataset you want to use")
+file_path = input() #Change this to accept a user input with the file path during week 3
+  
 #Importing and printing the raw data from the external text file
 with open(file_path, "r") as datafile:
     for line in datafile:
