@@ -6,7 +6,7 @@ import pandas as pd
 import math
 data = []
 
-#Input file path so that the code works for other users aswell
+#Input file path so that the code works for other users aswell (Initially it was the file path unique to my laptop)
 file_path = "output-Set0.txt"
 
 #Importing and printing the raw data from the external text file
@@ -20,7 +20,7 @@ with open(file_path,"r") as datafile:
     for line in datafile:
         operators = line.split()
 
-        if len(operators) != 4: #Skips the header ( 1 29 ) which caused problems as it had 2 values instead of 4
+        if len(operators) != 4: #Skips the header ( 1 29 ) which caused problems as it had 2 values instead of 4. Going to reimplement later
             continue
 
         px, py, pz, particle_id = operators
@@ -43,3 +43,6 @@ dataframe["p"] = np.sqrt(
 )
 #Test
 print(dataframe)
+
+#Calculating an uncertainty for each value #Starting week 3
+dataframe["su"] = 
