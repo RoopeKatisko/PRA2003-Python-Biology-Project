@@ -45,4 +45,3 @@ dataframe["p"] = np.sqrt(
 print(dataframe)
 
 #Calculating an uncertainty for each value #Starting week 3
-dataframe["su"] = 
