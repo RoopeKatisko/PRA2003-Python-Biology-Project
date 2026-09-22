@@ -17,4 +17,4 @@ Create a program that reads data from a downloaded file and shows its movement w
 -Pandas
 -Matplotlib (later)
 
-#Usage: download Output-set8.txt (or any of the other ones, this is just the one I used for testing) from surfdrive as it exceeds the upload size limit on github and then simply follow the instructions provided within the code
+#Usage: download Output-set8.txt (or any of the other ones as this is just the one I used for testing) from surfdrive as it exceeds the upload size limit on github and then simply follow the instructions provided within the code (You may need to input the entire file path by right clicking the file in your file manager and choosing copy path)
