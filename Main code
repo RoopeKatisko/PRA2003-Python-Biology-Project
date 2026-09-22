@@ -1,45 +1,50 @@
 #MAT2007 DATA ANALYSIS PROJECT CODE
 #Extensions for data reading/Graphing, installation added to readme at a later date
+from multiprocessing import process
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import math
 data = []
+#Took way too long to read the entire file (never got to the end of it so this function)
 
 #Input file path so that the code works for other users aswell (Initially it was the file path unique to my laptop)
 print("Please enter the dataset you want to use")
 try:
     file_path = input("File path: ").strip().strip('"')
-  #Importing and printing the raw data from the external text file
-    with open(file_path, "r") as datafile:
-        for line in datafile:
-            operators = line.split()
-            print("Initial data", operators)
 except FileNotFoundError:
     print("File not found. Please check the file path and try again.")
     raise SystemExit
-#Importing and printing the raw data from the external text file
+else:
+    print("File found. Proceeding with data analysis... This may take a while")
+#Took way too long to read the entire file so I implemented this function to read the file in chunks of 100000 bits
+#Please note this may take longer still depending the Random Access Memory of your computer as it may bottleneck and not be able to sort at 100000 bits at a time. If this is the case, please change the num value in the readManyLines function to a lower value (e.g. 10000) and try again.
+def readManyLines(file_path, num=100000):
+  lines = file_path.readlines(num)
+  for line in lines:
+    yield line
 
-#Adding and separating the values in the "data" list and through that into a pandas dataframe
-with open(file_path,"r") as datafile:
-    for line in datafile:
-        operators = line.split()
+f = open(file_path, "r")
+for line in readManyLines(f):
+    operators = line.split()
 
-        if len(operators) != 4: #Skips the header ( 1 29 ) which caused problems as it had 2 values instead of 4. Going to reimplement later
-            continue
+    if len(operators) != 4: #Skips the header ( 1 29 ) which caused problems as it had 2 values instead of 4. Going to reimplement later
+        continue
+#Now the data is sorted into their respective momenta and id of the bacteria
+    px, py, pz, particle_id = operators
 
-        px, py, pz, particle_id = operators
+    data.append([
+        float(px),
+        float(py),
+        float(pz),
+        int(particle_id)
+    ])
 
-        data.append([
-            float(px),
-            float(py),
-            float(pz),
-            int(particle_id)
-        ])
-
+print("Data sorted into their respective momenta, and particle ID's.")
 dataframe = pd.DataFrame(data, columns=["px", "py", "pz", "id"])
-#Test
-print(dataframe)
+
+
 
 
 
@@ -49,8 +54,7 @@ dataframe["p"] = np.sqrt(
     dataframe["py"]**2 + 
     dataframe["pz"]**2 
 )
-#Test
-print(dataframe)
+
 
 #Code that lets you choose which particle ID you want to analyze, and then filters the dataframe to only include that particle ID
 try:
