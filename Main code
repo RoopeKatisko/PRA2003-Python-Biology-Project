@@ -8,13 +8,17 @@ data = []
 
 #Input file path so that the code works for other users aswell (Initially it was the file path unique to my laptop)
 print("Please enter the dataset you want to use")
-file_path = input() #Change this to accept a user input with the file path during week 3
-  
+try:
+    file_path = input("File path: ").strip().strip('"')
+  #Importing and printing the raw data from the external text file
+    with open(file_path, "r") as datafile:
+        for line in datafile:
+            operators = line.split()
+            print("Initial data", operators)
+except FileNotFoundError:
+    print("File not found. Please check the file path and try again.")
+    raise SystemExit
 #Importing and printing the raw data from the external text file
-with open(file_path, "r") as datafile:
-    for line in datafile:
-        operators = line.split()
-        print("Initial data", operators)
 
 #Adding and separating the values in the "data" list and through that into a pandas dataframe
 with open(file_path,"r") as datafile:
@@ -34,8 +38,11 @@ with open(file_path,"r") as datafile:
         ])
 
 dataframe = pd.DataFrame(data, columns=["px", "py", "pz", "id"])
-#Self explanatory
+#Test
 print(dataframe)
+
+
+
 #Total momentum function using Numpy sqrt functions and pandas dataframe appends
 dataframe["p"] = np.sqrt( 
     dataframe["px"]**2 + 
@@ -45,4 +52,23 @@ dataframe["p"] = np.sqrt(
 #Test
 print(dataframe)
 
-#Calculating an uncertainty for each value #Starting week 3
+#Code that lets you choose which particle ID you want to analyze, and then filters the dataframe to only include that particle ID
+try:
+    particle_id = int(input("Enter the particle ID you want to analyze: "))
+except ValueError:
+    print("Invalid input. Please enter a valid integer.")
+    raise SystemExit
+dataframe = dataframe[dataframe["id"] == particle_id]
+
+print(dataframe)
+#Calculating an uncertainty for each value, starting with the standard deviation 
+
+std = dataframe["p"].std()
+if std == 0: 
+    print("Standard deviation is zero due to lack of entries for this particle ID. Please check the dataset and try again.")
+    raise SystemExit
+else:
+    print("Standard deviation of particle", particle_id, "momentum:", std)
+
+statunc = std / math.sqrt(len(dataframe))
+print("Statistical uncertainty of particle", particle_id, "momentum:", statunc)
