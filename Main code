@@ -7,34 +7,38 @@ import numpy as np
 import pandas as pd
 import math
 data = []
-#Took way too long to read the entire file (never got to the end of it so this function)
+
 
 #Input file path so that the code works for other users aswell (Initially it was the file path unique to my laptop)
 print("Please enter the dataset you want to use")
+
+file_path = input("File path: ").strip().strip('"')
+
+
+#Took way too long to read the entire file so I implemented this function to read the file in chunks
+#The number in line in lines is from a long trial and error to get a good ratio and get the function to work for 500k events, and it worked. I will reimplement this later to make it more efficient and less hardcoded
+def readManyLines(file_path, num=50000000):
+  lines = file_path.readlines(num)
+  for line in lines[0:510017]: 
+    yield line
 try:
-    file_path = input("File path: ").strip().strip('"')
+    f = open(file_path, "r")
 except FileNotFoundError:
     print("File not found. Please check the file path and try again.")
     raise SystemExit
-else:
-    print("File found. Proceeding with data analysis... This may take a while")
-#Took way too long to read the entire file so I implemented this function to read the file in chunks of 100000 bits
-#Please note this may take longer still depending the Random Access Memory of your computer as it may bottleneck and not be able to sort at 100000 bits at a time. If this is the case, please change the num value in the readManyLines function to a lower value (e.g. 10000) and try again.
-def readManyLines(file_path, num=100000):
-  lines = file_path.readlines(num)
-  for line in lines:
-    yield line
+except OSError:
+    print("Invalid file path. Please check the file path and try again.")
+    raise SystemExit
 
-f = open(file_path, "r")
+print("File opened successfully. Proceeding with data analysis... This may take a while")
 for line in readManyLines(f):
-    operators = line.split()
-
-    if len(operators) != 4: #Skips the header ( 1 29 ) which caused problems as it had 2 values instead of 4. Going to reimplement later
-        continue
+        operators = line.split()
+        if len(operators) != 4: #Skips the header ( 1 29 ) which caused problems as it had 2 values instead of 4. Going to reimplement later
+            continue
 #Now the data is sorted into their respective momenta and id of the bacteria
-    px, py, pz, particle_id = operators
+        px, py, pz, particle_id = operators
 
-    data.append([
+        data.append([
         float(px),
         float(py),
         float(pz),
@@ -44,7 +48,7 @@ for line in readManyLines(f):
 print("Data sorted into their respective momenta, and particle ID's.")
 dataframe = pd.DataFrame(data, columns=["px", "py", "pz", "id"])
 
-
+print(dataframe)
 
 
 
@@ -57,22 +61,24 @@ dataframe["p"] = np.sqrt(
 
 
 #Code that lets you choose which particle ID you want to analyze, and then filters the dataframe to only include that particle ID
-try:
-    particle_id = int(input("Enter the particle ID you want to analyze: "))
-except ValueError:
-    print("Invalid input. Please enter a valid integer.")
-    raise SystemExit
+
+particle_id = int(input("Enter the particle ID you want to analyze: "))
+
 dataframe = dataframe[dataframe["id"] == particle_id]
 
 print(dataframe)
 #Calculating an uncertainty for each value, starting with the standard deviation 
 
 std = dataframe["p"].std()
-if std == 0: 
-    print("Standard deviation is zero due to lack of entries for this particle ID. Please check the dataset and try again.")
+if std == 0:
+    print("Standard deviation is zero due to lack of entries for this particle ID. Please check the dataset for a valid id and try again")
+else:
+    print(f"Standard deviation for particle ID {particle_id}: {std}")
+
+try:
+    statunc = std / math.sqrt(len(dataframe))
+except ZeroDivisionError:
+    print("Statistical uncertainty is 0 due to not having a standard deviation or entries in the dataset")
     raise SystemExit
 else:
-    print("Standard deviation of particle", particle_id, "momentum:", std)
-
-statunc = std / math.sqrt(len(dataframe))
-print("Statistical uncertainty of particle", particle_id, "momentum:", statunc)
+    print(f"Statistical uncertainty for particle ID {particle_id}: {statunc}")
