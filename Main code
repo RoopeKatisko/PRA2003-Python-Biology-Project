@@ -16,10 +16,10 @@ file_path = input("File path: ").strip().strip('"')
 
 
 #Took way too long to read the entire file so I implemented this function to read the file in chunks
-#The number in line in lines is from a long trial and error to get a good ratio and get the function to work for 500k events, and it worked. I will reimplement this later to make it more efficient and less hardcoded
-def readManyLines(file_path, num=50000000):
+#The number in line in lines is from a long trial and error to get a good ratio and get the function to work for 500k (If past 23.9.2026, will be changed to 5m instead with no range) I will reimplement this later to make it more efficient and less hardcoded
+def readManyLines(file_path, num=500000000):
   lines = file_path.readlines(num)
-  for line in lines[0:510017]: 
+  for line in lines: 
     yield line
 try:
     f = open(file_path, "r")
@@ -31,6 +31,7 @@ except OSError:
     raise SystemExit
 
 print("File opened successfully. Proceeding with data analysis... This may take a while")
+
 for line in readManyLines(f):
         operators = line.split()
         if len(operators) != 4: #Skips the header ( 1 29 ) which caused problems as it had 2 values instead of 4. Going to reimplement later
