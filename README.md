@@ -67,7 +67,7 @@ MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 | Tuberculosis WD and DR Tuberculosis    | 0.622σ below the mean    |
 | Salmonella WD and Salmonella MT        | 0.675σ above the mean    |
 ### Asymmetry for each bacterial pair
-| Organism | WD Mean | MT/CD Mean | Asymmetry (A) | Asymmetry (%) |
+| Organism | WD Mean | MT/CD/DR Mean | Asymmetry (A) | Asymmetry (%) |
 | -------- | ------- | ---------- | ------------- | ------------- |
 | E-Coli | 3.735 | 3.743 | -0.00107 | -0.107% |
 | Bacillus | 5.163 | 5.143 | 0.00194 | 0.194% |
