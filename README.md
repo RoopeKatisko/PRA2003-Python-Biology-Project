@@ -1,40 +1,64 @@
-#PRA2003-Bacterial-Kinematics-Project
-##Student Info
-#Name: Kristofer Katisko
-#StudentID: 6433876
+# PRA2003-Bacterial-Kinematics-Project
+### Student Info
+### Name: Kristofer Katisko
+### StudentID: 6433876
 
-##Question to answer:
-     
-#Does the bacteria and its mutant variant behave in the same way
-    -Is there symmetry within the original population and its mutant variation, if not, how much do the two populations deviate from eachother
-  #Can we calculate and simulate the bacteria's momentum in a 3 dimensional plane using graphing tools
+# Question to answer:
 
-#Implementation.
-Create a program that reads data from a downloaded file and shows its movement within a 3 dimensional plane using functions containing 3 dimensional arrays displayed through plugins of python such as Numpy, Matplotlib, and pandas as a file analyser. 
+## Does the bacteria and its mutant variant behave in the same way
+ ### Is there symmetry within the original population and its mutant variation, if not, how much do the two populations deviate from eachother
+## Can we calculate and simulate the bacteria's momentum in a 3 dimensional plane using graphing tools
 
-#Requirements
--Numpy
--Pandas
--Matplotlib (later)
+## What are the standard deviations and uncertainties of each bacterial variant
+  ### How do they measure on Gaussian probability curve
 
-#Usage: download Output-set8.txt (or any of the other ones as this is just the one I used for testing) from surfdrive as it exceeds the upload size limit on github and then simply follow the instructions provided within the code (You may need to input the entire file path by right clicking the file in your file manager and choosing copy path)
+# Implementation.
+### Create a program that reads data from 10 downloaded files each running 500,000 experiments and show its movement within a 3 dimensional plane using functions containing 3 dimensional arrays displayed through plugins of python such as Numpy, Matplotlib. After this use the program to calculate the uncertainties within the different bacterial types (Mainly the bacteria's wild variant and its mutated variant. After this, analyse the data and calculate the standard deviations between the two types of bacteria for each bacteria. The code works by the user inputting the file they wish to use by copy-pasting its file path within the computers internal file storage
 
-#Results
-Abbreviations
-MT = Mutant, WD = Wild, CD = Capsule deficient
+### Sub sampling, Each data file AND particle id is used as its own sub sampling category to create a more precise uncertainty and mean. Using the 10 different files provided, each file was used in conjunction with the particle id selector within the code
+To create multiple sets of data which were then analysed
+### Statistical uncertainty, Standard deviation divided by the square root of the entries in the sub sample
+### Gaussian distribution curve used to measure how far the values of the Mutant variant is from the Wild variant w
 
 
--Set8.txt
-ID, Name, Amount, Uncertainty
-211 E-Coli 2280197, 0.003...
--211 E-Coli 2276960, 0.003...
-321 Bacillius 287146. 0.014...
--321 Bacillius MT 286488 0.014...
-2212 Pseudomonas WD 137695 0.024...
--2212 Pseudomonas MT 135792 0.023...
-3122 Streptoccus pneum 31331 0.056...
--3122 Streptoccus (CD) 30761 0.055...
-3312 Mycobacterium Tuberculosis 4528 0.177...
--3312 DR Mycobacterium Tuberculosis 4296 0.169...
-3334 Salmonella Enteric 143 1.000003...
--3334 Salmonella MT 123 1.13....
+
+# Requirements
+### Numpy
+### Pandas
+### Matplotlib (later)
+
+# User guide
+### To begin, the user must download the above mentioned requirements and begin by entering the "Main code" section. After this the user will start the program and the program will request the user to input a file path from their computers directory. Following this the code will ask for the particle id from the user and will respond with the appropriate information based on the file provided
+
+# Results
+### Abbreviations
+### MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
+| ID    | Name              | Mean  | Uncertainty | Standard Deviations |
+| ------| ----------------- | ----- | ----------- | ------------------- |
+| 211   | E-Coli WD         | 3.735 | 0.003       | 5.865               |
+| -211  | E-Coli MT         | 3.743 | 0.003       | 5.854               |
+| 321   | Bacillius WD      | 5.163 | 0.014       | 7.791               |
+| -321  | Bacillius MT      | 5.143 | 0.014       | 7.618               |
+| 2212  | Pseudomonas WD    | 6.399 | 0.024       | 8.955               |
+| -2212 | Pseudomonas MT    | 6.401 | 0.023       | 8.792               |
+| 3122  | Streptoccus WD    | 7.195 | 0.056       | 9.989               |
+| -3122 | Streptoccus CD    | 7.075 | 0.055       | 9.965               |
+| 3312  | Tuberculosis WD   | 8.335 | 0.177       | 9.753               |
+| -3312 | DR Tuberculosis   | 7.716 | 0.169       | 9.757               |
+| 3334  | Salmonella WD     | 9.923 | 1.00003     | 12.003              |
+| -3334 | Salmonella MT     | 9.234 | 1.130       | 12.542              |
+| Organism Pair                          | Distribution             |
+| -------------------------------------- | ------------------------ |
+| E-Coli WD and E-Coli MT                | 0.357σ below the mean    |
+| Bacillius WD and Bacillius MT          | 0.456σ below the mean    |
+| Pseudomonas WD and Pseudomonas MT      | 0.537σ above the mean    |
+| Streptoccus WD and Streptoccus CD      | 0.55012σ above the mean  |
+| Tuberculosis WD and DR Tuberculosis    | 0.622σ below the mean    |
+| Salmonella WD and Salmonella MT        | 0.675σ above the mean    |
+
+
+
+# Discussion
+### From the uncertainties we see that E coli and its mutant variant have the lowest uncertainty when compared to each-other and Salmonella and its mutant have the highest as seen from the their uncertainties and distributions on the Gaussian probability curve
+### In each strain of bacteria we see that the Wild type is more common than the mutated type even if just slightly so. This however may change with time as a mutation becomes optimal for conditions causing an evolutionary step of the mutation becoming the norm
+###
