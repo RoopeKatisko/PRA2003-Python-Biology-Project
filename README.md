@@ -6,19 +6,19 @@
 # Question to answer:
 
 ## Does the bacteria and its mutant variant behave in the same way
- ### Is there symmetry within the original population and its mutant variation, if not, how much do the two populations deviate from eachother
+ Is there symmetry within the original population and its mutant variation, if not, how much do the two populations deviate from eachother
 ## Can we calculate and simulate the bacteria's momentum in a 3 dimensional plane using graphing tools
 
 ## What are the standard deviations and uncertainties of each bacterial variant
-  ### How do they measure on Gaussian probability curve
+  How do they measure on Gaussian probability curve
 
 # Implementation.
-### Create a program that reads data from 10 downloaded files each running 500,000 experiments and show its movement within a 3 dimensional plane using functions containing 3 dimensional arrays displayed through plugins of python such as Numpy, Matplotlib. After this use the program to calculate the uncertainties within the different bacterial types (Mainly the bacteria's wild variant and its mutated variant. After this, analyse the data and calculate the standard deviations between the two types of bacteria for each bacteria. The code works by the user inputting the file they wish to use by copy-pasting its file path within the computers internal file storage
+ Create a program that reads data from 10 downloaded files each running 500,000 experiments and show its movement within a 3 dimensional plane using functions containing 3 dimensional arrays displayed through plugins of python such as Numpy, Matplotlib. After this use the program to calculate the uncertainties within the different bacterial types (Mainly the bacteria's wild variant and its mutated variant. After this, analyse the data and calculate the standard deviations between the two types of bacteria for each bacteria. The code works by the user inputting the file they wish to use by copy-pasting its file path within the computers internal file storage
 
-### Sub sampling, Each data file AND particle id is used as its own sub sampling category to create a more precise uncertainty and mean. Using the 10 different files provided, each file was used in conjunction with the particle id selector within the code
-To create multiple sets of data which were then analysed
-### Statistical uncertainty, Standard deviation divided by the square root of the entries in the sub sample
-### Gaussian distribution curve used to measure how far the values of the Mutant variant is from the Wild variant w
+Sub sampling, Each data file AND particle id is used as its own sub sampling category to create a more precise uncertainty and mean. Using the 10 different files provided, each file was used in conjunction with the particle id selector within the code to create multiple sets of data which were then analysed
+ Statistical uncertainty, Standard deviation divided by the square root of the entries in the sub sample
+ Gaussian distribution curve used to measure how far (in terms of standard deviation) the values of the Mutant variant is from the Wild variant 
+
 
 
 
@@ -28,11 +28,21 @@ To create multiple sets of data which were then analysed
 ### Matplotlib (later)
 
 # User guide
+## Installation requirements
+| Category | Requirement |
+| -------- | ----------- |
+| Operating System | Windows 10/11, macOS, or Linux |
+| Python Version | Python 3.13+ |
+| RAM | Minimum 8 GB |
+| Storage Space | 7–10 GB available disk space |
+| Internet Connection | Required for installation and updates |
+| Dependencies | Install via `pip install -r requirements.txt` |
+
 ### To begin, the user must download the above mentioned requirements and begin by entering the "Main code" section. After this the user will start the program and the program will request the user to input a file path from their computers directory. Following this the code will ask for the particle id from the user and will respond with the appropriate information based on the file provided
 
 # Results
 ### Abbreviations
-### MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
+MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 | ID    | Name              | Mean  | Uncertainty | Standard Deviations |
 | ------| ----------------- | ----- | ----------- | ------------------- |
 | 211   | E-Coli WD         | 3.735 | 0.003       | 5.865               |
@@ -47,7 +57,8 @@ To create multiple sets of data which were then analysed
 | -3312 | DR Tuberculosis   | 7.716 | 0.169       | 9.757               |
 | 3334  | Salmonella WD     | 9.923 | 1.00003     | 12.003              |
 | -3334 | Salmonella MT     | 9.234 | 1.130       | 12.542              |
-| Organism Pair                          | Distribution             |
+### Comparison of the organism pairs
+| Organism Pair                          | Distribution             | 
 | -------------------------------------- | ------------------------ |
 | E-Coli WD and E-Coli MT                | 0.357σ below the mean    |
 | Bacillius WD and Bacillius MT          | 0.456σ below the mean    |
@@ -55,10 +66,18 @@ To create multiple sets of data which were then analysed
 | Streptoccus WD and Streptoccus CD      | 0.55012σ above the mean  |
 | Tuberculosis WD and DR Tuberculosis    | 0.622σ below the mean    |
 | Salmonella WD and Salmonella MT        | 0.675σ above the mean    |
+### Asymmetry for each bacterial pair
+| Organism | WD Mean | MT/CD Mean | Asymmetry (A) | Asymmetry (%) |
+| -------- | ------- | ---------- | ------------- | ------------- |
+| E-Coli | 3.735 | 3.743 | -0.00107 | -0.107% |
+| Bacillus | 5.163 | 5.143 | 0.00194 | 0.194% |
+| Pseudomonas | 6.399 | 6.401 | -0.00016 | -0.016% |
+| Streptococcus | 7.195 | 7.075 | 0.00841 | 0.841% |
+| Tuberculosis | 8.335 | 7.716 | 0.03856 | 3.856% |
+| Salmonella | 9.923 | 9.234 | 0.03597 | 3.597% |
 
 
+# Discussion and limitations
+ From the uncertainties we see that E coli and its mutant variant have the lowest uncertainty when compared to each-other and Salmonella and its mutant have the highest as seen from the their uncertainties and distributions on the Gaussian probability curve. This may be however to the significantly lower amount of data entries for salmonella compared to E-coli which had nearly 9 times more entries
+In each strain of bacteria we see that the Wild type is more common than the mutated type even if just slightly so. This however may change with time as a mutation becomes optimal for conditions causing an evolutionary step of the mutation becoming the normal wild type
 
-# Discussion
-### From the uncertainties we see that E coli and its mutant variant have the lowest uncertainty when compared to each-other and Salmonella and its mutant have the highest as seen from the their uncertainties and distributions on the Gaussian probability curve
-### In each strain of bacteria we see that the Wild type is more common than the mutated type even if just slightly so. This however may change with time as a mutation becomes optimal for conditions causing an evolutionary step of the mutation becoming the norm
-###
