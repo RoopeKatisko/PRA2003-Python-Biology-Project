@@ -3,16 +3,16 @@
 ### Name: Kristofer Katisko
 ### StudentID: 6433876
 
-# 1.Question to answer:
+# 1.Question(s) to answer:
 
-## Does the bacteria and its mutant variant behave in the same way
+### 1.1 Does the bacteria and its mutant variant behave in the same way
  Is there symmetry within the original population and its mutant variation, if not, how much do the two populations deviate from eachother
-## Can we calculate and simulate the bacteria's momentum in a 3 dimensional plane using graphing tools
+### 1.2 Can we calculate and simulate the bacteria's momentum in a 3 dimensional plane using graphing tools
 
-## What are the standard deviations and uncertainties of each bacterial variant
-  How do they measure on Gaussian probability curve
+### 1.3 What are the standard deviations and uncertainties of each bacterial variant
+  How does the the wild and mutant variations of the bacterial strain compare on Gaussian probability curve
 
-# 2.Implementation.
+# 2.Implementation
  Create a program that reads data from 10 downloaded files each running 500,000 experiments and show its movement within a 3 dimensional plane using functions containing 3 dimensional arrays displayed through plugins of python such as Numpy, Matplotlib. After this use the program to calculate the uncertainties within the different bacterial types (Mainly the bacteria's wild variant and its mutated variant. After this, analyse the data and calculate the standard deviations between the two types of bacteria for each bacteria. The code works by the user inputting the file they wish to use by copy-pasting its file path within the computers internal file storage
 
 Sub sampling, Each data file AND particle id is used as its own sub sampling category to create a more precise uncertainty and mean. Using the 10 different files provided, each file was used in conjunction with the particle id selector within the code to create multiple sets of data which were then analysed
@@ -23,9 +23,9 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 
 
 # 3. Dependencies and plugins
-### Numpy (For calculations that would take long to code and to use Numpy arrays)
+### Numpy (For calculations that would take long to code, and to use Numpy arrays)
 ### Pandas (To creata dataframes which are easier to work with)
-### Matplotlib (To plot the momenta of bacteria (week 5&6)
+### Matplotlib (To plot the momenta of bacteria (week 5&6))
 ### Scipy.statistics (For calculations of uncertainty and standard deviation)
 
 # 4. User guide
@@ -44,7 +44,7 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 # 5.Results
 ### Abbreviations
 MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
-| ID    | Name              | Mean  | Uncertainty | Standard Deviations |
+| ID    | Name              | Mean  | Uncertainty | Standard Deviation |
 | ------| ----------------- | ----- | ----------- | ------------------- |
 | 211   | E-Coli WD         | 3.735 | 0.003       | 5.865               |
 | -211  | E-Coli MT         | 3.743 | 0.003       | 5.854               |
@@ -59,7 +59,7 @@ MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 | 3334  | Salmonella WD     | 9.923 | 1.00003     | 12.003              |
 | -3334 | Salmonella MT     | 9.234 | 1.130       | 12.542              |
 ### Comparison of the organism pairs
-| Organism Pair                          | Distribution             | 
+| Bacterial Pair                          | Distribution             | 
 | -------------------------------------- | ------------------------ |
 | E-Coli WD and E-Coli MT                | 0.357σ below the mean    |
 | Bacillius WD and Bacillius MT          | 0.456σ below the mean    |
@@ -81,7 +81,9 @@ MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 # 6.Discussion and limitations
  From the uncertainties we see that E coli and its mutant variant have the lowest uncertainty when compared to each-other and Salmonella and its mutant have the highest as seen from the their uncertainties and distributions on the Gaussian probability curve. This may be however to the significantly lower amount of data entries for salmonella compared to E-coli which had nearly 9 times more entries.
 In each strain of bacteria we see that the Wild type is more common than the mutated type even if just slightly so. This however may change with time as a mutation becomes optimal for conditions causing an evolutionary step of the mutation becoming the normal wild type
+Concerning the symmetry of bacterial strain, we find that Tuberculosis and Salmonella (and their respective mutant variants) are the most asymmetrical of bacterial pairs boasting a significant 3.856% and 3.597% of difference from their wild counterpart.
 To conclude we see that within the data provided, the wild strain of bacteria is more prevalent than the mutated type but the difference is quite small.
+
 ### 6.1 Limitations
 The statistical uncertainties are taken into account in the programs calculations above but the systematic uncertainty is ignored as we are given no information on the measuring devices / practices used to obtain the values present in the datafiles
 Another limitation is simply the time it took to analyse most of the files multiple times as for each bacterial ID (partly may be due to inefficiency in my code) the program had to scan through the entire document usually taking 3-5 minutes per run due to the sheer size of the file and low amount of RAM and processing power within my laptop
