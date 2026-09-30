@@ -26,6 +26,7 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 ### Numpy (For calculations that would take long to code and to use Numpy arrays)
 ### Pandas (To creata dataframes which are easier to work with)
 ### Matplotlib (To plot the momenta of bacteria (week 5&6)
+### Scipy.statistics (For calculations of uncertainty and standard deviation)
 
 # 4. User guide
 ## 4.1 Installation requirements
@@ -36,7 +37,7 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 | RAM | Minimum 8 GB |
 | Storage Space | 7–10 GB available disk space |
 | Internet Connection | Required for installation and updates |
-| Dependencies | Install via `pip install -r requirements.txt` |
+| Dependencies | Install via `pip install -r "Numpy/Pandas/Matplotlib/Scipy" |
 ### 4.2 Usage
  To begin, the user must download the above mentioned requirements and begin by entering the "Main code" section. After this the user will start the program and the program will request the user to input a file path from their computers directory. Following this the code will ask for the particle id from the user and will respond with the appropriate information based on the file provided
 
