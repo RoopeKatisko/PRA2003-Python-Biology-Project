@@ -78,6 +78,9 @@ MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 
 
 # 6.Discussion and limitations
- From the uncertainties we see that E coli and its mutant variant have the lowest uncertainty when compared to each-other and Salmonella and its mutant have the highest as seen from the their uncertainties and distributions on the Gaussian probability curve. This may be however to the significantly lower amount of data entries for salmonella compared to E-coli which had nearly 9 times more entries
+ From the uncertainties we see that E coli and its mutant variant have the lowest uncertainty when compared to each-other and Salmonella and its mutant have the highest as seen from the their uncertainties and distributions on the Gaussian probability curve. This may be however to the significantly lower amount of data entries for salmonella compared to E-coli which had nearly 9 times more entries.
 In each strain of bacteria we see that the Wild type is more common than the mutated type even if just slightly so. This however may change with time as a mutation becomes optimal for conditions causing an evolutionary step of the mutation becoming the normal wild type
-
+To conclude we see that within the data provided, the wild strain of bacteria is more prevalent than the mutated type but the difference is quite small.
+### 6.1 Limitations
+The statistical uncertainties are taken into account in the programs calculations above but the systematic uncertainty is ignored as we are given no information on the measuring devices / practices used to obtain the values present in the datafiles
+Another limitation is simply the time it took to analyse most of the files multiple times as for each bacterial ID (partly may be due to inefficiency in my code) the program had to scan through the entire document usually taking 3-5 minutes per run due to the sheer size of the file and low amount of RAM and processing power within my laptop
