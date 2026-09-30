@@ -23,9 +23,9 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 
 
 # 3. Dependencies and plugins
-### Numpy
-### Pandas
-### Matplotlib (later)
+### Numpy (For calculations that would take long to code and to use Numpy arrays)
+### Pandas (To creata dataframes which are easier to work with)
+### Matplotlib (To plot the momenta of bacteria (week 5&6)
 
 # 4. User guide
 ## 4.1 Installation requirements
