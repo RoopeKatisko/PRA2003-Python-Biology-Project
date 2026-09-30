@@ -3,7 +3,7 @@
 ### Name: Kristofer Katisko
 ### StudentID: 6433876
 
-# Question to answer:
+# 1.Question to answer:
 
 ## Does the bacteria and its mutant variant behave in the same way
  Is there symmetry within the original population and its mutant variation, if not, how much do the two populations deviate from eachother
@@ -12,7 +12,7 @@
 ## What are the standard deviations and uncertainties of each bacterial variant
   How do they measure on Gaussian probability curve
 
-# Implementation.
+# 2.Implementation.
  Create a program that reads data from 10 downloaded files each running 500,000 experiments and show its movement within a 3 dimensional plane using functions containing 3 dimensional arrays displayed through plugins of python such as Numpy, Matplotlib. After this use the program to calculate the uncertainties within the different bacterial types (Mainly the bacteria's wild variant and its mutated variant. After this, analyse the data and calculate the standard deviations between the two types of bacteria for each bacteria. The code works by the user inputting the file they wish to use by copy-pasting its file path within the computers internal file storage
 
 Sub sampling, Each data file AND particle id is used as its own sub sampling category to create a more precise uncertainty and mean. Using the 10 different files provided, each file was used in conjunction with the particle id selector within the code to create multiple sets of data which were then analysed
@@ -22,13 +22,13 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 
 
 
-# Requirements
+# 3. Dependencies and plugins
 ### Numpy
 ### Pandas
 ### Matplotlib (later)
 
-# User guide
-## Installation requirements
+# 4. User guide
+## 4.1 Installation requirements
 | Category | Requirement |
 | -------- | ----------- |
 | Operating System | Windows 10/11, macOS, or Linux |
@@ -37,10 +37,10 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 | Storage Space | 7–10 GB available disk space |
 | Internet Connection | Required for installation and updates |
 | Dependencies | Install via `pip install -r requirements.txt` |
+### 4.2 Usage
+ To begin, the user must download the above mentioned requirements and begin by entering the "Main code" section. After this the user will start the program and the program will request the user to input a file path from their computers directory. Following this the code will ask for the particle id from the user and will respond with the appropriate information based on the file provided
 
-### To begin, the user must download the above mentioned requirements and begin by entering the "Main code" section. After this the user will start the program and the program will request the user to input a file path from their computers directory. Following this the code will ask for the particle id from the user and will respond with the appropriate information based on the file provided
-
-# Results
+# 5.Results
 ### Abbreviations
 MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 | ID    | Name              | Mean  | Uncertainty | Standard Deviations |
@@ -77,7 +77,7 @@ MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 | Salmonella | 9.923 | 9.234 | 0.03597 | 3.597% |
 
 
-# Discussion and limitations
+# 6.Discussion and limitations
  From the uncertainties we see that E coli and its mutant variant have the lowest uncertainty when compared to each-other and Salmonella and its mutant have the highest as seen from the their uncertainties and distributions on the Gaussian probability curve. This may be however to the significantly lower amount of data entries for salmonella compared to E-coli which had nearly 9 times more entries
 In each strain of bacteria we see that the Wild type is more common than the mutated type even if just slightly so. This however may change with time as a mutation becomes optimal for conditions causing an evolutionary step of the mutation becoming the normal wild type
 
