@@ -40,7 +40,7 @@ for root, folders, files in os.walk(folder_path):
             continue
 
         for line in readManyLines(file):
-
+            #Makes it so that each operator is defined as a new operator based on the space betweem
             operators = line.split()
 
             # Deletes entries that dont have 4 values including the header of the event
@@ -87,7 +87,7 @@ for filename, dataframe in subsamples:
     bacteria_data = dataframe[dataframe["bacteria_id"] == bacteria_id]["p"]
     mutant_data = dataframe[dataframe["bacteria_id"] == mutant_id]["p"]
 
-    bacteria_entries = len(bacteria_data)
+    bacteria_amount = len(bacteria_data)
     mutant_amount = len(mutant_data)
 
     # Calculate the mean and standard deviation
@@ -98,8 +98,8 @@ for filename, dataframe in subsamples:
 
     # Calculate the statistical uncertainty
     bacteria_statunc = (
-        bacteria_std / math.sqrt(bacteria_entries)
-        if bacteria_entries else np.nan
+        bacteria_std / math.sqrt(bacteria_amount)
+        if bacteria_amount else np.nan
     )
 
     mutant_statunc = (
@@ -108,19 +108,18 @@ for filename, dataframe in subsamples:
     )
 
     # Calculate the total number of entries
-    combined_entries = bacteria_entries + mutant_amount
+    combined = bacteria_amount + mutant_amount
 
     # Calculate the bacteria-mutant asymmetry
     asymmetry = (
-        (bacteria_entries - mutant_amount) / combined_entries
-        if combined_entries else np.nan
-    )
+        (bacteria_amount - mutant_amount) / combined
+   )
 
 
 
     results.append({
         "file": filename,
-        "bacteria_entries": bacteria_entries,
+        "bacteria_entries": bacteria_amount,
         "bacteria_mean": bacteria_mean,
         "bacteria_std": bacteria_std,
         "bacteria_uncertainty": bacteria_statunc,
@@ -128,7 +127,7 @@ for filename, dataframe in subsamples:
         "mutant_mean": mutant_mean,
         "mutant_std": mutant_std,
         "mutant_uncertainty": mutant_statunc,
-        "combined_entries": combined_entries,
+        "combined_entries": combined,
         "asymmetry": asymmetry,
     })
 
@@ -161,9 +160,9 @@ print("Bacteria and its Mutant strain results: ")
 
 print("Bacteria ID:", bacteria_id)
 print("Mutant ID:", mutant_id)
-print("Total bacteria entries:", results_dataframe["bacteria_entries"].sum())
-print("Total mutant entries:", results_dataframe["mutant_entries"].sum())
-print("Total combined entries:", results_dataframe["combined_entries"].sum())
+print("Total bacteria:", results_dataframe["bacteria_amount"].sum())
+print("Total mutant :", results_dataframe["mutant_amount"].sum())
+print("Total combined:", results_dataframe["combined"].sum())
 print("Average bacteria mean amount:", results_dataframe["bacteria_mean"].mean())
 print("Average mutant mean amount:", results_dataframe["mutant_mean"].mean())
 print("Average bacteria standard deviation:", results_dataframe["bacteria_std"].mean())
