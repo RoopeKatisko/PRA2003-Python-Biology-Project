@@ -16,8 +16,8 @@ file_path = input("File path: ").strip().strip('"')
 
 
 #Took way too long to read the entire file so I implemented this function to read the file in chunks
-#The number in line in lines is from a long trial and error to get a good ratio and get the function to work for 500k (If past 23.9.2026, will be changed to 5m instead with no range) I will reimplement this later to make it more efficient and less hardcoded
-def readManyLines(file_path, num=500000000):
+#The number in line in lines is from a long trial and error to get a good ratio and get the function to work for 500k 
+def readManyLines(file_path, num=200000000):
   lines = file_path.readlines(num)
   for line in lines: 
     yield line
@@ -62,6 +62,7 @@ dataframe["p"] = np.sqrt(
 
 
 #Code that lets you choose which particle ID you want to analyze, and then filters the dataframe to only include that particle ID
+#Subsampling per particle
 
 particle_id = int(input("Enter the particle ID you want to analyze: "))
 
@@ -83,3 +84,7 @@ except ZeroDivisionError:
     raise SystemExit
 else:
     print(f"Statistical uncertainty for particle ID {particle_id}: {statunc}")
+
+mean = dataframe["p"].mean()
+print(mean)
+    
