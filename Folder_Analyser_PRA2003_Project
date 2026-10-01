@@ -17,7 +17,7 @@ folder_path = input("Folder path: ").strip().strip('"')
 
 
 # File reading function which reads the file in chunks to make it faster
-def readManyLines(file, num=200000000):
+def readManyLines(file, num=50000000):
     for line in file.readlines(num):
         yield line
 
@@ -99,12 +99,10 @@ for filename, dataframe in subsamples:
     # Calculate the statistical uncertainty
     bacteria_statunc = (
         bacteria_std / math.sqrt(bacteria_amount)
-        if bacteria_amount else np.nan
     )
 
     mutant_statunc = (
         mutant_std / math.sqrt(mutant_amount)
-        if mutant_amount else np.nan
     )
 
     # Calculate the total number of entries
@@ -119,15 +117,15 @@ for filename, dataframe in subsamples:
 
     results.append({
         "file": filename,
-        "bacteria_entries": bacteria_amount,
+        "bacteria_amount": bacteria_amount,
         "bacteria_mean": bacteria_mean,
         "bacteria_std": bacteria_std,
         "bacteria_uncertainty": bacteria_statunc,
-        "mutant_entries": mutant_amount,
+        "mutant_amount": mutant_amount,
         "mutant_mean": mutant_mean,
         "mutant_std": mutant_std,
         "mutant_uncertainty": mutant_statunc,
-        "combined_entries": combined,
+        "combined": combined,
         "asymmetry": asymmetry,
     })
 
@@ -135,23 +133,6 @@ for filename, dataframe in subsamples:
 # Creating a dataframe containing the results from all subsamples and combining ALL the sub samples for the ID chosen
 results_dataframe = pd.DataFrame(results)
 
-
-print("Results of all the combined files")
-
-print(results_dataframe[[
-    "file",
-    "bacteria_entries",
-    "bacteria_mean",
-    "bacteria_std",
-    "bacteria_uncertainty",
-    "mutant_entries",
-    "mutant_mean",
-    "mutant_std",
-    "mutant_uncertainty",
-    "combined_entries",
-    "asymmetry",
-    "z_score"
-]])
 
 
 # Calculate the overall results
@@ -169,5 +150,5 @@ print("Average bacteria standard deviation:", results_dataframe["bacteria_std"].
 print("Average mutant standard deviation:", results_dataframe["mutant_std"].mean())
 print("Average bacteria uncertainty:", results_dataframe["bacteria_uncertainty"].mean())
 print("Average mutant uncertainty:", results_dataframe["mutant_uncertainty"].mean())
-print("Average asymmetry:", results_dataframe["asymmetry"])
+print("Average asymmetry:", results_dataframe["asymmetry"].mean())
 
