@@ -13,7 +13,7 @@
   How many standard deviations of difference does the wild variant have compared to its mutant counterpart
 
 # 2.Implementation
- Create a program that reads data from 10 downloaded files each running 500,000 experiments and show its movement within a 3 dimensional plane using functions containing 3 dimensional arrays displayed through plugins of python such as Numpy, Matplotlib. After this use the program to calculate the uncertainties within the different bacterial types (Mainly the bacteria's wild variant and its mutated variant. After this, analyse the data and calculate the standard deviations between the two types of bacteria for each bacteria. The code works by the user inputting the file they wish to use by copy-pasting its file path within the computers internal file storage
+ Create a program that reads data from 10 downloaded files each running 500,000 experiments and show its movement within a 3 dimensional plane using functions containing 3 dimensional arrays displayed through plugins of python such as Numpy, Matplotlib. After this use the program to calculate the uncertainties within the different bacterial types (Mainly the bacteria's wild variant and its mutated variant. After this, analyse the data and calculate the standard deviations between the two types of bacteria for each bacteria. The code works by the user inputting the file they wish to use by copy-pasting its file path within the computers internal file storage and from that analysing the code itself and providing the user with the values required.
 
 Sub sampling, Each data file AND particle id is used as its own sub sampling category to create a more precise uncertainty and mean. Using the 10 different files provided, each file was used in conjunction with the particle id selector within the code to create multiple sets of data which were then analysed
  Statistical uncertainty, Standard deviation divided by the square root of the entries in the sub sample
@@ -39,7 +39,11 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 | Storage Space | 7–10 GB available disk space |
 | Internet Connection | Required for installation and updates |
 | Dependencies | Install via `pip install -r "Numpy/Pandas/Matplotlib/Scipy" |
-### 4.2 Usage
+### 4.2 Provided files
+The files are split into 2. The first one, "File_Analyser_PRA2003_Project" is the first installation, and it runs 1 file at a time and gives the values of the bacterium within that file. It is however a bit rudimentary and does not provide assymetries or z scores.
+The second file "Folder_Analyser_PRA2003_Project" is the final complete version of the project and it analyses an entire folder with all the wanted files within the folder
+The last file provided is the readme file which contains all the information about the code, project and results.
+### 4.3 Usage
  To begin, the user must download the above mentioned requirements and begin by entering the "Main code" section. After this the user will start the program and the program will request the user to input a file path from their computers directory. Following this the code will ask for the particle id from the user and will respond with the appropriate information based on the file provided
  For the folder analyser the user must input the Folder containing all the files that wish to be analysed. 
 
@@ -57,7 +61,7 @@ MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 | 3122  | Streptoccus WD    | 6.773 | 0.051       | 9.104               |
 | -3122 | Streptoccus CD    | 6.710 | 0.050       | 8.942               |
 | 3312  | Tuberculosis WD   | 7.614 | 0.152       | 10.21               |
-| -3312 | DR Tuberculosis   | 7.543 | 0.152       | 10.17               |
+| -3312 | Tuberculosis DR | 7.543 | 0.152       | 10.17               |
 | 3334  | Salmonella WD     | 8.696 | 0.970       | 11.338              |
 | -3334 | Salmonella MT     | 8.851 | 1.023       | 11.763              |
 ### Comparison of the organism pairs
@@ -83,9 +87,9 @@ MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 # 6.Discussion and limitations
  From the uncertainties we see that E coli and its mutant variant have the lowest uncertainty  and Salmonella and its mutant have the highest as seen from the their uncertainties. This may be however to the significantly lower amount of data entries for salmonella compared to E-coli which had nearly 9 times more entries.
 In each strain of bacteria we see that the Wild type is more common than the mutated type even if just slightly so. This however may change with time as a mutation becomes optimal for conditions causing an evolutionary step of the mutation becoming the normal wild type
-For the standard deviations we see that most wild and mutant pairs fall well within 3 standard deviations of each other which Bacillius having the highest standard deviation from its mutant counterpart at 2.03 standard deviations
+For the standard deviations we see that most wild and mutant pairs fall well within 3 standard deviations of each other which Bacillius having the highest standard deviation from its mutant counterpart at 2.03 standard deviations.
 Concerning the symmetry of bacterial strain, we find that Pseudomonas and Salmonella (and their respective mutant variants) are the most asymmetrical of bacterial pairs boasting a 1.1% and 0.98% difference.
-To conclude we see that within the data provided, the wild strain of bacteria is more prevalent than the mutated type but the difference is quite small.
+To conclude we see that within the data provided, the wild strain of bacteria is more prevalent having a slightly higher mean than the mutated type but the difference is quite small.
 
 ### 6.1 Limitations
 The statistical uncertainties are taken into account in the programs calculations above but the systematic uncertainty is ignored as we are given no information on the measuring devices / practices used to obtain the values present in the datafiles
