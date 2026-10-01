@@ -1,4 +1,8 @@
+#Disclaimer: THIS CODE IS FOR 1 FILE AT A TIME. TO ANALYSE THE WHOLE FOLDER SEE THE OTHER CODE
+
 #MAT2007 DATA ANALYSIS PROJECT CODE
+
+
 #Extensions for data reading/Graphing, installation added to readme at a later date
 from multiprocessing import process
 

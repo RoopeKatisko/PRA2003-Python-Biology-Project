@@ -24,9 +24,10 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 
 # 3. Dependencies and plugins
 ### Numpy (For calculations that would take long to code, and to use Numpy arrays)
-### Pandas (To creata dataframes which are easier to work with)
+### Pandas (To create dataframes which are easier to work with)
 ### Matplotlib (To plot the momenta of bacteria (week 5&6))
 ### Scipy.statistics (For calculations of uncertainty and standard deviation)
+### Os (For navigating and working with the files and folder used)
 
 # 4. User guide
 ## 4.1 Installation requirements
@@ -44,38 +45,38 @@ Sub sampling, Each data file AND particle id is used as its own sub sampling cat
 # 5.Results
 ### Abbreviations
 MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
-| ID    | Name              | Mean  | Uncertainty | Standard Deviation |
+| ID    | Name              | Mean  | Uncertainty | Standard Deviation  |
 | ------| ----------------- | ----- | ----------- | ------------------- |
-| 211   | E-Coli WD         | 3.735 | 0.003       | 5.865               |
-| -211  | E-Coli MT         | 3.743 | 0.003       | 5.854               |
-| 321   | Bacillius WD      | 5.163 | 0.014       | 7.791               |
-| -321  | Bacillius MT      | 5.143 | 0.014       | 7.618               |
-| 2212  | Pseudomonas WD    | 6.399 | 0.024       | 8.955               |
-| -2212 | Pseudomonas MT    | 6.401 | 0.023       | 8.792               |
-| 3122  | Streptoccus WD    | 7.195 | 0.056       | 9.989               |
-| -3122 | Streptoccus CD    | 7.075 | 0.055       | 9.965               |
-| 3312  | Tuberculosis WD   | 8.335 | 0.177       | 9.753               |
-| -3312 | DR Tuberculosis   | 7.716 | 0.169       | 9.757               |
-| 3334  | Salmonella WD     | 9.923 | 1.00003     | 12.003              |
-| -3334 | Salmonella MT     | 9.234 | 1.130       | 12.542              |
+| 211   | E-Coli WD         | 3.646 | 0.003       | 5.377               |
+| -211  | E-Coli MT         | 3.640 | 0.003       | 5.339               |
+| 321   | Bacillius WD      | 4.940 | 0.013       | 7.092               |
+| -321  | Bacillius MT      | 4.902 | 0.012       | 6.957               |
+| 2212  | Pseudomonas WD    | 6.086 | 0.021       | 8.157               |
+| -2212 | Pseudomonas MT    | 6.038 | 0.021       | 7.967               |
+| 3122  | Streptoccus WD    | 6.773 | 0.051       | 9.104               |
+| -3122 | Streptoccus CD    | 6.710 | 0.050       | 8.942               |
+| 3312  | Tuberculosis WD   | 7.614 | 0.152       | 10.21               |
+| -3312 | DR Tuberculosis   | 7.543 | 0.152       | 10.17               |
+| 3334  | Salmonella WD     | 8.696 | 0.970       | 11.338              |
+| -3334 | Salmonella MT     | 8.851 | 1.023       | 11.763              |
 ### Comparison of the organism pairs
 | Bacterial Pair                          | Distribution             | 
 | -------------------------------------- | ------------------------ |
-| E-Coli WD and E-Coli MT                | 0.357σ below the mean    |
-| Bacillius WD and Bacillius MT          | 0.456σ below the mean    |
-| Pseudomonas WD and Pseudomonas MT      | 0.537σ above the mean    |
-| Streptoccus WD and Streptoccus CD      | 0.55012σ above the mean  |
-| Tuberculosis WD and DR Tuberculosis    | 0.622σ below the mean    |
-| Salmonella WD and Salmonella MT        | 0.675σ above the mean    |
+| E-Coli WD and E-Coli MT                | 1.12σ     |
+| Bacillius WD and Bacillius MT          | 2.03σ     |
+| Pseudomonas WD and Pseudomonas MT      | 1.42σ     |
+| Streptoccus WD and Streptoccus CD      | 0.999σ  |
+| Tuberculosis WD and DR Tuberculosis    | 0.868σ    |
+| Salmonella WD and Salmonella MT        | 1.012σ    |
 ### Asymmetry for each bacterial pair
 | Organism | WD Mean | MT/CD/DR Mean | Asymmetry (A) | Asymmetry (%) |
 | -------- | ------- | ---------- | ------------- | ------------- |
-| E-Coli | 3.735 | 3.743 | -0.00107 | -0.107% |
-| Bacillus | 5.163 | 5.143 | 0.00194 | 0.194% |
-| Pseudomonas | 6.399 | 6.401 | -0.00016 | -0.016% |
-| Streptococcus | 7.195 | 7.075 | 0.00841 | 0.841% |
-| Tuberculosis | 8.335 | 7.716 | 0.03856 | 3.856% |
-| Salmonella | 9.923 | 9.234 | 0.03597 | 3.597% |
+| E-Coli   | 3.646 | 3.640 | 0.0007 | 0.07% |
+| Bacillius | 4.940 | 4.902 | 0.0017 | 0.17% |
+| Pseudomonas |6.086 | 6.038 | 0.0098 |0.98% |
+| Streptococcus | 6.773 | 6.710 | 0.0075 | 0.75% |
+| Tuberculosis | 7.614 | 7.543 | 0.008 | 0.8% |
+| Salmonella | 8.696 | 8.851 | 0.011 | 1.1% |
 
 
 # 6.Discussion and limitations

@@ -1,0 +1,174 @@
+#PRA2003 FULL 10 FILES FOLDER ANALYSIS
+import os
+import math
+import numpy as np
+import pandas as pd
+
+# The 3 (initially) empty lists. The first stores the subsamples data individually.
+# The data list stores all the operators and bacteria ids of all files.
+# Results file stores all the final values in a dataframe for better viewing
+subsamples = []
+data = []
+results = []
+
+# Changed from just entering a file path into a folder path as i found no other way to input 10 other files simultaneously
+print("Please enter the folder containing the subsample files")
+folder_path = input("Folder path: ").strip().strip('"')
+
+
+# File reading function which reads the file in chunks to make it faster
+def readManyLines(file, num=200000000):
+    for line in file.readlines(num):
+        yield line
+
+
+print("Reading all files within the folder.... This may take a while")
+
+
+# Find and read all files in the folder and its subfolders
+for root, folders, files in os.walk(folder_path):
+
+    for filename in files:
+
+        file_path = os.path.join(root, filename)
+        print("Opening", filename)
+
+        try:
+            file = open(file_path, "r")
+        except OSError:
+            print("Could not open", filename)
+            continue
+
+        for line in readManyLines(file):
+
+            operators = line.split()
+
+            # Deletes entries that dont have 4 values including the header of the event
+            # and corrupted lines (which may have commas or spaces causing it to have
+            # 5 or 6 entries per line)
+            if len(operators) != 4:
+                continue
+
+            try:
+                # Sorting the data into their respective values
+                px, py, pz, bacteria_id = operators
+                data.append([float(px), float(py), float(pz), int(bacteria_id)])
+            except ValueError:
+                continue
+
+        file.close()
+
+
+        # Creating the pandas dataframe which stores ALL entries
+        dataframe = pd.DataFrame(data, columns=["px", "py", "pz", "bacteria_id"])
+
+        # Turning the vector values into 1 scalar value
+        dataframe["p"] = np.sqrt(
+            dataframe["px"]**2 +
+            dataframe["py"]**2 +
+            dataframe["pz"]**2
+        )
+
+        subsamples.append((filename, dataframe))
+print("All data entries sorted into their respective momenta and id's")
+
+# Lets the user choose the bacteria they want to analyze
+bacteria_id = int(input("Enter the bacteria ID you want to analyze (211, 321, 2212, 3122, 3312, 3334): "))
+
+# Now the code also gets the mutant ID's values to be compared
+mutant_id = -bacteria_id
+
+
+# Analyse each subsample separately and put their datas into a dataframe
+for filename, dataframe in subsamples:
+
+    print("Analysing", filename)
+
+    bacteria_data = dataframe[dataframe["bacteria_id"] == bacteria_id]["p"]
+    mutant_data = dataframe[dataframe["bacteria_id"] == mutant_id]["p"]
+
+    bacteria_entries = len(bacteria_data)
+    mutant_amount = len(mutant_data)
+
+    # Calculate the mean and standard deviation
+    bacteria_mean = bacteria_data.mean()
+    mutant_mean = mutant_data.mean()
+    bacteria_std = bacteria_data.std()
+    mutant_std = mutant_data.std()
+
+    # Calculate the statistical uncertainty
+    bacteria_statunc = (
+        bacteria_std / math.sqrt(bacteria_entries)
+        if bacteria_entries else np.nan
+    )
+
+    mutant_statunc = (
+        mutant_std / math.sqrt(mutant_amount)
+        if mutant_amount else np.nan
+    )
+
+    # Calculate the total number of entries
+    combined_entries = bacteria_entries + mutant_amount
+
+    # Calculate the bacteria-mutant asymmetry
+    asymmetry = (
+        (bacteria_entries - mutant_amount) / combined_entries
+        if combined_entries else np.nan
+    )
+
+
+
+    results.append({
+        "file": filename,
+        "bacteria_entries": bacteria_entries,
+        "bacteria_mean": bacteria_mean,
+        "bacteria_std": bacteria_std,
+        "bacteria_uncertainty": bacteria_statunc,
+        "mutant_entries": mutant_amount,
+        "mutant_mean": mutant_mean,
+        "mutant_std": mutant_std,
+        "mutant_uncertainty": mutant_statunc,
+        "combined_entries": combined_entries,
+        "asymmetry": asymmetry,
+    })
+
+
+# Creating a dataframe containing the results from all subsamples and combining ALL the sub samples for the ID chosen
+results_dataframe = pd.DataFrame(results)
+
+
+print("Results of all the combined files")
+
+print(results_dataframe[[
+    "file",
+    "bacteria_entries",
+    "bacteria_mean",
+    "bacteria_std",
+    "bacteria_uncertainty",
+    "mutant_entries",
+    "mutant_mean",
+    "mutant_std",
+    "mutant_uncertainty",
+    "combined_entries",
+    "asymmetry",
+    "z_score"
+]])
+
+
+# Calculate the overall results
+
+print("Bacteria and its Mutant strain results: ")
+
+print("Bacteria ID:", bacteria_id)
+print("Mutant ID:", mutant_id)
+print("Total bacteria entries:", results_dataframe["bacteria_entries"].sum())
+print("Total mutant entries:", results_dataframe["mutant_entries"].sum())
+print("Total combined entries:", results_dataframe["combined_entries"].sum())
+print("Average bacteria mean amount:", results_dataframe["bacteria_mean"].mean())
+print("Average mutant mean amount:", results_dataframe["mutant_mean"].mean())
+print("Average bacteria standard deviation:", results_dataframe["bacteria_std"].mean())
+print("Average mutant standard deviation:", results_dataframe["mutant_std"].mean())
+print("Average bacteria uncertainty:", results_dataframe["bacteria_uncertainty"].mean())
+print("Average mutant uncertainty:", results_dataframe["mutant_uncertainty"].mean())
+print("Average asymmetry:", results_dataframe["asymmetry"])
+
