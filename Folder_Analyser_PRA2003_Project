@@ -79,17 +79,17 @@ for filename, dataframe in subsamples:
 
     bacteria_data = dataframe[dataframe["bacteria_id"] == bacteria_id]["p"]
     mutant_data = dataframe[dataframe["bacteria_id"] == mutant_id]["p"]
-
+#The amount of data entries for the bacteria id and its mutant
     bacteria_amount = len(bacteria_data)
     mutant_amount = len(mutant_data)
 
-    # Calculate the mean and standard deviation
+    # Calculating the mean and standard deviation 
     bacteria_mean = bacteria_data.mean()
     mutant_mean = mutant_data.mean()
     bacteria_std = bacteria_data.std()
     mutant_std = mutant_data.std()
 
-    # Calculate the statistical uncertainty
+    # Calculating the statistical uncertainty for the bacteria and its mutant variant
     bacteria_statunc = (
         bacteria_std / math.sqrt(bacteria_amount)
     )
@@ -126,18 +126,15 @@ results_dataframe = pd.DataFrame(results)
 
 # Calculate the overall results
 
-print("Bacteria and its Mutant strain results: ")
-
-print("Bacteria ID:", bacteria_id)
-print("Mutant ID:", mutant_id)
-print("Total bacteria:", results_dataframe["bacteria_amount"].sum())
-print("Total mutant :", results_dataframe["mutant_amount"].sum())
-print("Total combined:", results_dataframe["combined"].sum())
+print("Bacteria and its Mutant strain results for ID:", bacteria_id)
+print("Total bacteria data entries:", results_dataframe["bacteria_amount"].sum())
+print("Total mutant data entries:", results_dataframe["mutant_amount"].sum())
+print("Total combined data entries:", results_dataframe["combined"].sum())
 print("Average bacteria mean amount:", results_dataframe["bacteria_mean"].mean())
 print("Average mutant mean amount:", results_dataframe["mutant_mean"].mean())
 print("Average bacteria standard deviation:", results_dataframe["bacteria_std"].mean())
 print("Average mutant standard deviation:", results_dataframe["mutant_std"].mean())
 print("Average bacteria uncertainty:", results_dataframe["bacteria_uncertainty"].mean())
 print("Average mutant uncertainty:", results_dataframe["mutant_uncertainty"].mean())
-print("Average asymmetry:", results_dataframe["asymmetry"].mean())
+print("Asymmetry:", results_dataframe["asymmetry"].mean())
 
