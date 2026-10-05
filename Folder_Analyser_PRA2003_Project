@@ -3,12 +3,11 @@ import os
 import math
 import numpy as np
 import pandas as pd
-
+import matplotlib.pyplot as plt
 # The 3 (initially) empty lists. The first stores the subsamples data individually.
 # The data list stores all the operators and bacteria ids of all files.
 # Results file stores all the final values in a dataframe for better viewing
 subsamples = []
-data = []
 results = []
 
 # Changed from just entering a file path into a folder path as i found no other way to input 10 other files simultaneously
@@ -17,7 +16,7 @@ folder_path = input("Folder path: ").strip().strip('"')
 
 
 # File reading function which reads the file in chunks to make it faster
-def readManyLines(file, num=50000000):
+def readManyLines(file, num=8000000000):
     for line in file.readlines(num):
         yield line
 print("Reading all files within the folder.... This may take a while")
@@ -25,7 +24,7 @@ print("Reading all files within the folder.... This may take a while")
 for root, folders, files in os.walk(folder_path):
 
     for filename in files:
-
+        data = []
         file_path = os.path.join(root, filename)
         print("Opening", filename)
 
@@ -138,3 +137,49 @@ print("Average bacteria uncertainty:", results_dataframe["bacteria_uncertainty"]
 print("Average mutant uncertainty:", results_dataframe["mutant_uncertainty"].mean())
 print("Asymmetry:", results_dataframe["asymmetry"].mean())
 
+
+#Subsampling plot of momenta vs asymmetry
+bin_edges = [2, 4, 6, 8, 10, 12, 15, 20]
+bin_centers = []
+asymmetries = []
+asymmetry_unc_list = []
+
+
+for i in range(len(bin_edges)-1):
+
+    low = bin_edges[i]
+    high = bin_edges[i+1]
+
+    bact = bacteria_data.sum()
+
+    mut = mutant_data.sum()
+
+    bactmut = bact + mut
+
+    if bactmut == 0:
+        continue
+
+    A = (bact - mut) / bactmut
+
+    # Statistical uncertainty on asymmetry
+    asymmetry_unc = np.sqrt((1 - (A)**2) / bactmut)
+
+    bin_centers.append((low + high) / 2)
+    asymmetries.append(A)
+    asymmetry_unc_list.append(asymmetry_unc)
+    
+plt.figure(figsize=(10,7))
+plt.axhline(linestyle=":", color="tab:blue", label=f"overall A = {asymmetry:.4f}")
+plt.errorbar(
+    bin_centers,
+    asymmetries,
+    yerr=asymmetry_unc_list,
+    fmt='o-',
+    capsize=4)
+plt.xlabel("Mean momentum p")
+plt.ylabel("Asymmetry")
+plt.title(
+    f"Asymmetry vs Mean momentum for ID {bacteria_id} and {mutant_id}")
+plt.grid(True)
+plt.show()
+plt.savefig(f"asymmetry_{bacteria_id}_{mutant_id}.png", dpi=300)
