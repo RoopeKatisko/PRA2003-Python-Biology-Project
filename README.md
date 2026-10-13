@@ -50,6 +50,7 @@ The last file provided is the readme file which contains all the information abo
 # 5.Results
 ### Abbreviations
 MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
+5.1 Results Dataset
 | ID    | Name              | Mean  | Uncertainty | Standard Deviation  |
 | ------| ----------------- | ----- | ----------- | ------------------- |
 | 211   | E-Coli WD         | 3.646 | 0.003       | 5.377               |
@@ -83,6 +84,13 @@ MT = Mutant, WD = Wild, CD = Capsule deficient, DR = Drug resistant
 | Tuberculosis | 7.614 | 7.543 | 0.008 | 0.8% |
 | Salmonella | 8.696 | 8.851 | 0.011 | 1.1% |
 
+5.2 Plots
+
+<img width="997" height="771" alt="image" src="https://github.com/user-attachments/assets/b57f5836-8da8-4628-9cbf-7e22fbd410f6" />
+### Fig. 5,1: The plot shows the asymmetry between the mutant and wild variants of the bacteria 3334 (-3334) by sub sampling them into 10 bins, each of different momentums showing us the average asymmetry per momentum of the bacteria
+
+<img width="1000" height="721" alt="image" src="https://github.com/user-attachments/assets/59a3e67a-4d0b-45f9-aa7c-8b88c8c3d7bc" />
+### Fig. 5,2 The plot shows the asymmetry between the mutant and wild variants of the bacteria 2212 (-2212) with the same parameters as fig 5.1 
 
 # 6.Discussion and limitations
  From the uncertainties we see that E coli and its mutant variant have the lowest uncertainty  and Salmonella and its mutant have the highest as seen from the their uncertainties. This may be however to the significantly lower amount of data entries for salmonella compared to E-coli which had nearly 9 times more entries.
@@ -90,7 +98,7 @@ In each strain of bacteria we see that the Wild type is more common than the mut
 For the standard deviations we see that most wild and mutant pairs fall well within 3 standard deviations of each other which Bacillius having the highest standard deviation from its mutant counterpart at 2.03 standard deviations.
 Concerning the symmetry of bacterial strain, we find that Pseudomonas and Salmonella (and their respective mutant variants) are the most asymmetrical of bacterial pairs boasting a 1.1% and 0.98% difference.
 To conclude we see that within the data provided, the wild strain of bacteria is more prevalent having a slightly higher mean than the mutated type but the difference is quite small.
-
+From the plots we see that that the asymmetry generally follows a pattern when taking the uncertainty into account and doesn't have a general rule for the correlation between the momentum and the asymmetry itself, being a feature of the mutant and its behavior.
 ### 6.1 Limitations
 The statistical uncertainties are taken into account in the programs calculations above but the systematic uncertainty is ignored as we are given no information on the measuring devices / practices used to obtain the values present in the datafiles
 Another limitation is simply the time it took to analyse most of the files multiple times as for each bacterial ID (partly may be due to inefficiency in my code) the program had to scan through the entire document usually taking 3-5 minutes per run due to the sheer size of the file and low amount of RAM and processing power within my laptop
