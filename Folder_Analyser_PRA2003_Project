@@ -22,7 +22,6 @@ def readManyLines(file, num=8000000000):
 print("Reading all files within the folder.... This may take a while")
 # Find and read all files in the folder and its subfolders
 for root, folders, files in os.walk(folder_path):
-
     for filename in files:
         data = []
         file_path = os.path.join(root, filename)
@@ -139,20 +138,42 @@ print("Asymmetry:", results_dataframe["asymmetry"].mean())
 
 
 #Subsampling plot of momenta vs asymmetry
+#Subsampling plot of momenta vs asymmetry
 bin_edges = [2, 4, 6, 8, 10, 12, 15, 20]
 bin_centers = []
 asymmetries = []
 asymmetry_unc_list = []
 
+# Combine all subsamples
+bacteria_data = pd.concat([
+    df[df["bacteria_id"] == bacteria_id]["p"]
+    for filename, df in subsamples
+], ignore_index=True)
+
+mutant_data = pd.concat([
+    df[df["bacteria_id"] == mutant_id]["p"]
+    for filename, df in subsamples
+], ignore_index=True)
 
 for i in range(len(bin_edges)-1):
 
     low = bin_edges[i]
     high = bin_edges[i+1]
 
-    bact = bacteria_data.sum()
-
-    mut = mutant_data.sum()
+    if i == len(bin_edges)-2:
+        bact = len(bacteria_data[
+            (bacteria_data >= low) & (bacteria_data <= high)
+        ])
+        mut = len(mutant_data[
+            (mutant_data >= low) & (mutant_data <= high)
+        ])
+    else:
+        bact = len(bacteria_data[
+            (bacteria_data >= low) & (bacteria_data < high)
+        ])
+        mut = len(mutant_data[
+            (mutant_data >= low) & (mutant_data < high)
+        ])
 
     bactmut = bact + mut
 
@@ -161,25 +182,45 @@ for i in range(len(bin_edges)-1):
 
     A = (bact - mut) / bactmut
 
-    # Statistical uncertainty on asymmetry
-    asymmetry_unc = np.sqrt((1 - (A)**2) / bactmut)
+    asymmetry_unc = np.sqrt((1 - A**2) / bactmut)
 
     bin_centers.append((low + high) / 2)
     asymmetries.append(A)
     asymmetry_unc_list.append(asymmetry_unc)
-    
+
 plt.figure(figsize=(10,7))
-plt.axhline(linestyle=":", color="tab:blue", label=f"overall A = {asymmetry:.4f}")
+
+total_bact = len(bacteria_data)
+total_mut = len(mutant_data)
+total_combined = total_bact + total_mut
+
+overall_asymmetry = (
+    (total_bact - total_mut) / total_combined
+    if total_combined > 0 else float("nan")
+)
+
+plt.axhline(
+    y=overall_asymmetry,
+    linestyle=":",
+    color="tab:blue",
+    label=f"overall A = {overall_asymmetry:.4f}"
+)
+
 plt.errorbar(
     bin_centers,
     asymmetries,
     yerr=asymmetry_unc_list,
     fmt='o-',
-    capsize=4)
+    capsize=4
+)
+
 plt.xlabel("Mean momentum p")
 plt.ylabel("Asymmetry")
 plt.title(
-    f"Asymmetry vs Mean momentum for ID {bacteria_id} and {mutant_id}")
+    f"Asymmetry vs Mean momentum for ID {bacteria_id} and {mutant_id}"
+)
 plt.grid(True)
-plt.show()
+plt.legend()
+plt.tight_layout()
 plt.savefig(f"asymmetry_{bacteria_id}_{mutant_id}.png", dpi=300)
+plt.show()
